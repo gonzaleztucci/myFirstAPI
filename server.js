@@ -40,4 +40,24 @@ app.get('/api/quotes', (req, res, next) => {
         res.send(quotesObject);
     }
 
+});
+
+app.post('/api/quotes', (req, res, next) => {
+    const newQuote = req.query.quote;
+    const newPerson = req.query.person;
+    const quoteObject = {
+        quote: {}
+    };
+
+    if (newQuote && newPerson){
+        quoteObject.quote = {
+            quote: newQuote,
+            person: newPerson
+        }
+        quotes.push(quoteObject.quote);
+        res.send(quoteObject);
+        
+    } else {
+        res.sendStatus(400);
+    }
 })
