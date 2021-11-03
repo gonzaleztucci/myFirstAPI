@@ -14,9 +14,30 @@ app.listen(PORT, () => {
 
 app.get('/api/quotes/random', (req, res, next) => {
     const quote = getRandomElement(quotes);
-    res.send(quote);
+    const quoteObject = {
+        quote: quote
+    };
+    res.send(quoteObject);
   });
   
 app.get('/api/quotes', (req, res, next) => {
+    const query = req.query;
+    console.log(query);
+    const quotesObject = {
+        quotes: []
+    };
+    
+    if(Object.keys(query).length === 0){
+        console.log('TA VACIO');
+        quotesObject['quotes'] = quotes;
+        res.send(quotesObject);
+    } else {
+        quotes.filter(element => {
+            if(element['person'] === query['person']){
+                quotesObject.quotes.push(element);
+            }
+        } );
+        res.send(quotesObject);
+    }
 
 })
