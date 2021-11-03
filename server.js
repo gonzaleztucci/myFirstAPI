@@ -13,6 +13,10 @@ app.listen(PORT, () => {
 });
 
 app.get('/api/quotes/random', (req, res, next) => {
-    const quote = getRandomElement();
-  })
+    const quote = getRandomElement(quotes);
+    res.send(quote);
+  });
   
+app.get('/api/quotes', (req, res, next) => {
+
+})
